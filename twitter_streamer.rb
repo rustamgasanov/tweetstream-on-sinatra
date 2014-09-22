@@ -4,15 +4,14 @@ class TwitterStreamer
   end
 
   def run
-    init_options
     run_em
   end
 
   private
-  attr_reader :keys, :params, :options
+  attr_reader :keys, :params
 
-  def init_options
-    @options = {
+  def options
+    @options ||= {
       :path   => '/1/statuses/filter.json',
       :params => params,
       :oauth  => {
@@ -24,6 +23,10 @@ class TwitterStreamer
     }
   end
 
+  def logger
+    @logger ||= Logger.new('twitter_streamer.log', 1, 100_000)
+  end
+
   def run_em
     EM.run do
       client = EM::Twitter::Client.connect(options)
@@ -33,9 +36,9 @@ class TwitterStreamer
         text = parsed['text']
         unless text.empty?
           puts text
+          logger.info(text)
         end
       end
     end
   end
 end
-
