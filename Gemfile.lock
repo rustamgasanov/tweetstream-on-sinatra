@@ -31,6 +31,6 @@ PLATFORMS
 
 DEPENDENCIES
   em-twitter (= 0.3.3)
-  foreman
+  foreman (= 0.75.0)
   rack (= 1.5.2)
   sinatra (= 1.4.5)
