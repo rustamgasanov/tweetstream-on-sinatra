@@ -1,3 +1,4 @@
 config.yml
 twitter_streamer.log*
 *.swp
+Gemfile.lock
